@@ -14,41 +14,37 @@ let winningScore = 7;
 let scoreOne = 0;
 
 oneWin.addEventListener('click', function () {
-	
-    if (!gameOver) {
-        scoreOne++;
-        if (scoreOne === winningScore) {
-            gameOver = true;
-        } else if (scoreTwo + scoreOne === winningScore) {
-            gameOver = true;
-        } else if (scoreOne === sweep && scoreTwo === 0 ) {
-            gameOver = true;
-        } else if (scoreOne === 4 && scoreTwo === 1) {
-            gameOver = true;
-        }
-        oneScore.innerHTML = scoreOne;
-    }
-
-    
+	if (!gameOver) {
+		scoreOne++;
+		if (scoreOne === winningScore) {
+			gameOver = true;
+		} else if (scoreTwo + scoreOne === winningScore) {
+			gameOver = true;
+		} else if (scoreOne === sweep && scoreTwo === 0) {
+			gameOver = true;
+		} else if (scoreOne === 4 && scoreTwo === 1) {
+			gameOver = true;
+		}
+		oneScore.innerHTML = scoreOne;
+	}
 });
 
 let scoreTwo = 0;
 
 twoWin.addEventListener('click', function () {
-	
-    if (!gameOver) {
-         scoreTwo++;
-        if (scoreTwo === winningScore) {
-            gameOver = true;
-        } else if (scoreOne + scoreTwo === winningScore) {
-            gameOver = true;
-        } else if (scoreTwo === sweep && scoreOne === 0) {
-            gameOver = true;
-        } else if (scoreTwo === 4 && scoreOne === 1) {
-            gameOver = true;
-        }
-        twoScore.innerHTML = scoreTwo;
-    }
+	if (!gameOver) {
+		scoreTwo++;
+		if (scoreTwo === winningScore) {
+			gameOver = true;
+		} else if (scoreOne + scoreTwo === winningScore) {
+			gameOver = true;
+		} else if (scoreTwo === sweep && scoreOne === 0) {
+			gameOver = true;
+		} else if (scoreTwo === 4 && scoreOne === 1) {
+			gameOver = true;
+		}
+		twoScore.innerHTML = scoreTwo;
+	}
 });
 
 const oneSelect = document.querySelector('#team-one-select');
@@ -65,23 +61,23 @@ oneSelect.addEventListener('change', function (e) {
 	} else if (oneSelect.value == 'suns') {
 		imgOne.src = 'Assets/Logos/Suns.png';
 	}
-    
-    switch (oneSelect.value) {
-        case 'hawks' :
-        oneText.innerHTML = 'Atlanta Hawks';
-        break;
-        case 'bucks' :
-        oneText.innerHTML = 'Milwaukee Bucks';
-        break;
-        case 'clippers' :
-        oneText.innerHTML = 'LA Clippers';
-        break;
-        case 'suns' :
-        oneText.innerHTML = 'Phoenix Suns';
-        break;
-    }
 
-	oneSelect.style.display = 'none';
+	switch (oneSelect.value) {
+		case 'hawks':
+			oneText.innerHTML = 'Atlanta Hawks';
+			break;
+		case 'bucks':
+			oneText.innerHTML = 'Milwaukee Bucks';
+			break;
+		case 'clippers':
+			oneText.innerHTML = 'LA Clippers';
+			break;
+		case 'suns':
+			oneText.innerHTML = 'Phoenix Suns';
+			break;
+	}
+
+	oneSelect.style.visibility = 'hidden';
 });
 
 const twoSelect = document.querySelector('#team-two-select');
@@ -99,31 +95,39 @@ twoSelect.addEventListener('change', function (e) {
 		imgTwo.src = 'Assets/Logos/Suns.png';
 	}
 
-    switch (twoSelect.value) {
-        case 'hawks' :
-        twoText.innerHTML = 'Atlanta Hawks';
-        break;
-        case 'bucks' :
-        twoText.innerHTML = 'Milwaukee Bucks';
-        break;
-        case 'clippers' :
-        twoText.innerHTML = 'LA Clippers';
-        break;
-        case 'suns' :
-        twoText.innerHTML = 'Phoenix Suns';
-        break;
-    }
+	switch (twoSelect.value) {
+		case 'hawks':
+			twoText.innerHTML = 'Atlanta Hawks';
+			break;
+		case 'bucks':
+			twoText.innerHTML = 'Milwaukee Bucks';
+			break;
+		case 'clippers':
+			twoText.innerHTML = 'LA Clippers';
+			break;
+		case 'suns':
+			twoText.innerHTML = 'Phoenix Suns';
+			break;
+	}
 
-
-	twoSelect.style.display = 'none';
+	twoSelect.style.visibility = 'hidden';
 });
 
-reset.addEventListener ('click', function() {
-gameOver = false;
-scoreOne = 0;
-scoreTwo = 0;
-oneScore.innerHTML = '';
-twoScore.innerHTML = '';
-oneSelect.value = 'reset';
-twoSelect.value = 'reset';
-})
+reset.addEventListener('click', function () {
+	const resetImgOne = document.querySelector('.img-one');
+	const resetImgTwo = document.querySelector('.img-two');
+
+	gameOver = false;
+	scoreOne = 0;
+	scoreTwo = 0;
+	oneText.innerHTML = '';
+	twoText.innerHTML = '';
+	oneScore.innerHTML = '';
+	twoScore.innerHTML = '';
+	oneSelect.value = 'default';
+	twoSelect.value = 'default';
+	oneSelect.style.visibility = 'visible';
+	twoSelect.style.visibility = 'visible';
+	resetImgOne.src = '';
+	resetImgTwo.src = '';
+});
