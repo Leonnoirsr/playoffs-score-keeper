@@ -84,7 +84,7 @@ button {
       border-radius: 50%;
   }
 
-  #reset {
+  .reset {
       background-color: white;
       color: black;
     margin: auto;

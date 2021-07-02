@@ -1,133 +1,100 @@
-const teamOne = document.querySelector('.team-one');
-const teamTwo = document.querySelector('.team-one');
-const oneWin = document.querySelector('#team-one-win');
-const twoWin = document.querySelector('#team-two-win');
-const oneText = document.querySelector('#team-one-text');
-const twoText = document.querySelector('#team-two-text');
-const oneScore = document.querySelector('#team-one-score');
-const twoScore = document.querySelector('#team-two-score');
-const reset = document.querySelector('#reset');
-
 let gameOver = false;
 let sweep = 4;
 let winningScore = 7;
-let scoreOne = 0;
 
-oneWin.addEventListener('click', function () {
-	if (!gameOver) {
-		scoreOne++;
-		if (scoreOne === winningScore) {
-			gameOver = true;
-		} else if (scoreTwo + scoreOne === winningScore) {
-			gameOver = true;
-		} else if (scoreOne === sweep && scoreTwo === 0) {
-			gameOver = true;
-		} else if (scoreOne === 4 && scoreTwo === 1) {
-			gameOver = true;
-		}
-		oneScore.innerHTML = scoreOne;
-	}
-});
+const team1 = {
+	score: 0,
+	button: document.querySelector('#team-one-win'),
+	name: document.querySelector('#team-one-text'),
+	display: document.querySelector('#team-one-score'),
+	icon: document.querySelector('.img-one'),
+	select: document.querySelector('#team-one-select'),
+};
 
-let scoreTwo = 0;
+const team2 = {
+	score: 0,
+	button: document.querySelector('#team-two-win'),
+	name: document.querySelector('#team-two-text'),
+	display: document.querySelector('#team-two-score'),
+	icon: document.querySelector('.img-two'),
+	select: document.querySelector('#team-two-select'),
+};
 
-twoWin.addEventListener('click', function () {
-	if (!gameOver) {
-		scoreTwo++;
-		if (scoreTwo === winningScore) {
-			gameOver = true;
-		} else if (scoreOne + scoreTwo === winningScore) {
-			gameOver = true;
-		} else if (scoreTwo === sweep && scoreOne === 0) {
-			gameOver = true;
-		} else if (scoreTwo === 4 && scoreOne === 1) {
-			gameOver = true;
-		}
-		twoScore.innerHTML = scoreTwo;
-	}
-});
-
-const oneSelect = document.querySelector('#team-one-select');
-
-oneSelect.addEventListener('change', function (e) {
-	e.preventDefault();
-	const imgOne = document.querySelector('.img-one');
-	if (oneSelect.value == 'hawks') {
-		imgOne.src = 'Assets/Logos/Hawks.png';
-	} else if (oneSelect.value == 'bucks') {
-		imgOne.src = 'Assets/Logos/Bucks.png';
-	} else if (oneSelect.value == 'clippers') {
-		imgOne.src = 'Assets/Logos/clippers.png';
-	} else if (oneSelect.value == 'suns') {
-		imgOne.src = 'Assets/Logos/Suns.png';
+function selectTeam(team) {
+	if (team.select.value == 'hawks') {
+		team.icon.src = 'Assets/Logos/Hawks.png';
+	} else if (team.select.value == 'bucks') {
+		team.icon.src = 'Assets/Logos/Bucks.png';
+	} else if (team.select.value == 'clippers') {
+		team.icon.src = 'Assets/Logos/clippers.png';
+	} else if (team.select.value == 'suns') {
+		team.icon.src = 'Assets/Logos/Suns.png';
 	}
 
-	switch (oneSelect.value) {
+	switch (team.select.value) {
 		case 'hawks':
-			oneText.innerHTML = 'Atlanta Hawks';
+			team.name.innerHTML = 'Atlanta Hawks';
 			break;
 		case 'bucks':
-			oneText.innerHTML = 'Milwaukee Bucks';
+			team.name.innerHTML = 'Milwaukee Bucks';
 			break;
 		case 'clippers':
-			oneText.innerHTML = 'LA Clippers';
+			team.name.innerHTML = 'LA Clippers';
 			break;
 		case 'suns':
-			oneText.innerHTML = 'Phoenix Suns';
+			team.name.innerHTML = 'Phoenix Suns';
 			break;
 	}
 
-	oneSelect.style.visibility = 'hidden';
+	team.select.style.visibility = 'hidden';
+}
+
+team1.select.addEventListener('change', function () {
+	selectTeam(team1);
 });
 
-const twoSelect = document.querySelector('#team-two-select');
-
-twoSelect.addEventListener('change', function (e) {
-	e.preventDefault();
-	const imgTwo = document.querySelector('.img-two');
-	if (twoSelect.value == 'hawks') {
-		imgTwo.src = 'Assets/Logos/Hawks.png';
-	} else if (twoSelect.value == 'bucks') {
-		imgTwo.src = 'Assets/Logos/Bucks.png';
-	} else if (twoSelect.value == 'clippers') {
-		imgTwo.src = 'Assets/Logos/clippers.png';
-	} else if (twoSelect.value == 'suns') {
-		imgTwo.src = 'Assets/Logos/Suns.png';
-	}
-
-	switch (twoSelect.value) {
-		case 'hawks':
-			twoText.innerHTML = 'Atlanta Hawks';
-			break;
-		case 'bucks':
-			twoText.innerHTML = 'Milwaukee Bucks';
-			break;
-		case 'clippers':
-			twoText.innerHTML = 'LA Clippers';
-			break;
-		case 'suns':
-			twoText.innerHTML = 'Phoenix Suns';
-			break;
-	}
-
-	twoSelect.style.visibility = 'hidden';
+team2.select.addEventListener('change', function () {
+	selectTeam(team2);
 });
 
-reset.addEventListener('click', function () {
-	const resetImgOne = document.querySelector('.img-one');
-	const resetImgTwo = document.querySelector('.img-two');
+function updateScores(team, opponent) {
+	if (!gameOver) {
+		team.score++;
+		if (team.score === winningScore) {
+			gameOver = true;
+		} else if (team.score + opponent.score === winningScore) {
+			gameOver = true;
+		} else if (team.score === sweep && opponent.score === 0) {
+			gameOver = true;
+		} else if (team.score === 4 && opponent.score === 1) {
+			gameOver = true;
+		}
+		team.display.innerHTML = team.score;
+	}
+}
 
+team1.button.addEventListener('click', function () {
+	updateScores(team1, team2);
+});
+
+team2.button.addEventListener('click', function () {
+	updateScores(team2, team1);
+});
+
+const reset = document.querySelector('.reset');
+
+reset.addEventListener('click', function (team, opponent) {
 	gameOver = false;
-	scoreOne = 0;
-	scoreTwo = 0;
-	oneText.innerHTML = '';
-	twoText.innerHTML = '';
-	oneScore.innerHTML = '';
-	twoScore.innerHTML = '';
-	oneSelect.value = 'default';
-	twoSelect.value = 'default';
-	oneSelect.style.visibility = 'visible';
-	twoSelect.style.visibility = 'visible';
-	resetImgOne.src = '';
-	resetImgTwo.src = '';
+	team1.score = 0;
+	team2.score = 0;
+	team1.display.innerHTML = '';
+	team2.display.innerHTML = '';
+	team1.name.innerHTML = '';
+	team2.name.innerHTML = '';
+	team1.icon.src = '';
+	team2.icon.src = '';
+	team1.select.value = 'default';
+	team2.select.value = 'default';
+	team1.select.style.visibility = 'visible';
+	team2.select.style.visibility = 'visible';
 });
