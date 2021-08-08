@@ -49,11 +49,11 @@ function selectTeam(team) {
 	team.select.style.visibility = 'hidden';
 }
 
-team1.select.addEventListener('change', function () {
+team1.select.addEventListener('change',  () => {
 	selectTeam(team1);
 });
 
-team2.select.addEventListener('change', function () {
+team2.select.addEventListener('change',  () => {
 	selectTeam(team2);
 });
 
@@ -73,17 +73,17 @@ function updateScores(team, opponent) {
 	}
 }
 
-team1.button.addEventListener('click', function () {
+team1.button.addEventListener('click', () => {
 	updateScores(team1, team2);
 });
 
-team2.button.addEventListener('click', function () {
+team2.button.addEventListener('click', () => {
 	updateScores(team2, team1);
 });
 
 const reset = document.querySelector('.reset');
 
-reset.addEventListener('click', function (team, opponent) {
+reset.addEventListener('click', (team, opponent) => {
 	gameOver = false;
 	team1.score = 0;
 	team2.score = 0;
