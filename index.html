@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Playoffs Score Keeper</title>
+		<link rel="stylesheet" href="app.css" />
+	</head>
+	<body>
+		<div class="container">
+			<img src="Assets/Static Background.jpg" alt="" />
+			<div class="team-one" id="team-one">
+				<select name="" id="team-one-select">
+                    <option value="default">Select A Team</option> 
+                    <option value="hawks">Atlanta Hawks</option> 
+                    <option value="bucks">Milwaukee Bucks</option> 
+                    <option value="clippers">LA Clippers</option> 
+                    <option value="suns">Phoenix Suns</option> 
+                </select>
+				<img class="img-one" src="" alt="">
+			</div>
+			<div class="team-two" id="team-two">
+				<select name="" id="team-two-select"> 
+                    <option value="default">Select A Team</option> 
+                    <option value="hawks">Atlanta Hawks</option> 
+                    <option value="bucks">Milwaukee Bucks</option> 
+                    <option value="clippers">LA Clippers</option> 
+                    <option value="suns">Phoenix Suns</option> 
+                </select>
+				<img class="img-two" src="" alt="">
+			</div>
+			<div class="win-buttons">
+				<button id="team-one-win">Win</button>
+				<button id="team-two-win">Win</button>
+			</div>
+			<div class="dyn-text">
+				<p id="team-one-text">
+					
+				</p>
+				<p id="team-two-text">
+					
+				</p>
+			</div>
+			<h2 id="team-one-score"></h2>
+			<h2 id="team-two-score"></h2>
+			<button class="reset">Reset</button>
+		</div>
+
+		<script src="app.js"></script>
+		
+	</body>
+</html>
